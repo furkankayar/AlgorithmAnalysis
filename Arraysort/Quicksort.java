@@ -15,53 +15,54 @@ public class Quicksort{
 
     if(arrayToSort == null || arrayToSort.length == 0) throw new IllegalArgumentException("Array is empty.");
 
-    setArrayPivot(arrayToSort, pivotType);
+
     long startTime = System.currentTimeMillis();
-    sortWithOnePivot(arrayToSort, 0, arrayToSort.length - 1);
+    sortWithOnePivot(arrayToSort, 0, arrayToSort.length - 1, pivotType);
     return System.currentTimeMillis() - startTime;
   }
 
-	private static void sortWithOnePivot(int[] arr, int low, int high){
+	private static void sortWithOnePivot(int[] arr, int low, int high, PivotType pivotType){
 
     if (low < high){
-      int pi = partitionOnePivot(arr, low, high);
+      int pi = partitionOnePivot(arr, low, high, pivotType);
 
-      sortWithOnePivot(arr, low, pi - 1);
-      sortWithOnePivot(arr, pi + 1, high);
+      sortWithOnePivot(arr, low, pi - 1, pivotType);
+      sortWithOnePivot(arr, pi + 1, high, pivotType);
      }
   }
 
-  private static void setArrayPivot(int[] arrayToSort, PivotType pivotType){
+  private static void setArrayPivot(int[] arrayToSort, PivotType pivotType, int high, int low){
 
     int temp = 0;
-    int pivot = 0;
+    int pivot = low;
 
     if(pivotType == PivotType.FirstElement){
-      temp = arrayToSort[0];
+      temp = arrayToSort[low];
     }
 
     else if(pivotType == PivotType.RandomElement){
-      pivot = (int)(Math.random() * arrayToSort.length);
+      pivot = (int)(Math.random() * (high - low + 1)) + low;
       temp = arrayToSort[pivot];
     }
     else if(pivotType == PivotType.MidOfFirstMidLastElement){
-      int middleElement = arrayToSort[(arrayToSort.length-1)/2];
-      int firstElement = arrayToSort[0];
-      int lastElement = arrayToSort[arrayToSort.length - 1];
-      if(firstElement >= middleElement && firstElement <= lastElement) pivot = 0;
-      else if(firstElement <= middleElement && firstElement >= lastElement) pivot = 0;
-      else if(middleElement >= firstElement && middleElement <= lastElement) pivot = (arrayToSort.length-1)/2;
-      else if(middleElement <= firstElement && middleElement >= lastElement) pivot = (arrayToSort.length-1)/2;
-      else if(lastElement >= middleElement && lastElement <= firstElement) pivot = arrayToSort.length -1;
-      else if(lastElement <= middleElement && lastElement >= firstElement) pivot = arrayToSort.length -1;
+      int middleElement = arrayToSort[(high - low)/2 + low];
+      int firstElement = arrayToSort[low];
+      int lastElement = arrayToSort[high];
+      if(firstElement >= middleElement && firstElement <= lastElement) pivot = low;
+      else if(firstElement <= middleElement && firstElement >= lastElement) pivot = low;
+      else if(middleElement >= firstElement && middleElement <= lastElement) pivot = (high - low)/2 + low;
+      else if(middleElement <= firstElement && middleElement >= lastElement) pivot = (high - low)/2 + low;
+      else if(lastElement >= middleElement && lastElement <= firstElement) pivot = high;
+      else if(lastElement <= middleElement && lastElement >= firstElement) pivot = high;
       temp = arrayToSort[pivot];
     }
-
-    arrayToSort[pivot] = arrayToSort[arrayToSort.length - 1];
-    arrayToSort[arrayToSort.length - 1] = temp;
+    arrayToSort[pivot] = arrayToSort[high];
+    arrayToSort[high] = temp;
   }
 
-  static int partitionOnePivot(int[] arr, int low, int high){
+  static int partitionOnePivot(int[] arr, int low, int high, PivotType pivotType){ //https://www.geeksforgeeks.org/quick-sort/
+
+    setArrayPivot(arr, pivotType, high, low);
 
     int pivot = arr[high];
     int i = low-1;
@@ -78,7 +79,6 @@ public class Quicksort{
     int temp = arr[i+1];
     arr[i+1] = arr[high];
     arr[high] = temp;
-
     return i+1;
   }
 

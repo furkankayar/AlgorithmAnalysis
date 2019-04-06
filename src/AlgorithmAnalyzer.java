@@ -8,13 +8,13 @@ public class AlgorithmAnalyzer{
 
   public static void main(String[] args){
 
-    int[] array = new int[100000];
-    for(int i = 0 ; i < 100000 ; i++){
-       array[i] = (int)(Math.random() * 100000000);
+    int[] array = new int[1000000];
+    for(int i = 0 ; i < 1000000 ; i++){
+       array[i] = (int)(Math.random() * Integer.MAX_VALUE);
     }
 
 
-    System.out.println("Time: " + Heapsort.sort(array));
+    System.out.println("Time: " + Quicksort.sort(array, Quicksort.PivotType.RandomElement));
     //System.out.println(Arrays.toString(array));
 
   }

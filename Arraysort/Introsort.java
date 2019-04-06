@@ -21,10 +21,9 @@ public class Introsort{
 
     int p = Quicksort.partitionOnePivot(arr, low, high);
 
-    if(maxdepth == 0){
+    if(maxdepth == 0)
       Heapsort.sort(arr, low, high);
-    }
-
+    
     else{
 
       sort(arr, low, p - 1 , maxdepth - 1);
