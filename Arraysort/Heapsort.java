@@ -4,42 +4,41 @@ package Arraysort;
 public class Heapsort{
 
 
-  private static void maxHeapify(int arr[], int i, int n){
+  private static void maxHeapify(int arr[], int low, int high, int i){
 
-    int left = 2*i + 1;
-    int right = 2*i + 2;
-    int largest = left;
-    if (left <= n && arr[left] > arr[i])
+    int left = 2*i + 1 + low;
+    int right = 2*i + 2 + low;
+    int largest = i + low;
+    if (left <= high && arr[left] > arr[i + low])
       largest = left;
-    else largest = i;
-    if (right <= n && arr[right] > arr[largest])
+    else largest = i + low;
+    if (right <= high && arr[right] > arr[largest])
       largest = right;
 
-    if (largest != i){
-      int temp = arr[i];
-      arr[i] = arr[largest];
+    if (largest != i + low){
+      int temp = arr[i + low];
+      arr[i + low] = arr[largest];
       arr[largest] = temp;
-      maxHeapify(arr, largest, n);
+      maxHeapify(arr, low, high, largest - low);
     }
   }
 
-  private static void buildMaxHeap(int arr[], int n){
+  private static void sort(int arr[], int low, int high){
 
-    for(int i = n/2 ; i >= 0 ; i--)
-      maxHeapify(arr, i, n);
-  }
+    int n = high - low;
 
-  private static void sort(int arr[] , int n){
+    for(int i = n/2 ; i >= 0 ; i--){
+      maxHeapify(arr, low, high, i);
+    }
 
-    buildMaxHeap(arr, n);
-    for(int i = arr.length-1; i > 0 ; i--){
 
-      int temp = arr[0];
-      arr[0] = arr[i];
+    for(int i = n + low; i > low ; i--){
+
+      int temp = arr[low];
+      arr[low] = arr[i];
       arr[i] = temp;
-      maxHeapify(arr, 0, i - 1);
+      maxHeapify(arr, low, i-1 , 0);
     }
-
   }
 
   public static long sort(int arr[]) throws IllegalArgumentException{
@@ -47,7 +46,7 @@ public class Heapsort{
     if(arr == null || arr.length == 0) throw new IllegalArgumentException("Array is empty.");
 
     long startTime = System.currentTimeMillis();
-    sort(arr, arr.length - 1);
+    sort(arr, 0 , arr.length - 1);
 
     return System.currentTimeMillis() - startTime;
   }
