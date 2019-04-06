@@ -1,6 +1,6 @@
 
 package Arraysort;
-
+import java.util.Arrays;
 
 public class Quicksort{
 
@@ -61,7 +61,7 @@ public class Quicksort{
     arrayToSort[arrayToSort.length - 1] = temp;
   }
 
-  private static int partitionOnePivot(int[] arr, int low, int high){
+  static int partitionOnePivot(int[] arr, int low, int high){
 
     int pivot = arr[high];
     int i = low-1;

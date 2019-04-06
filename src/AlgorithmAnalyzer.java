@@ -1,6 +1,7 @@
 import java.util.Arrays;
 import Arraysort.Quicksort;
 import Arraysort.Heapsort;
+import Arraysort.Introsort;
 
 public class AlgorithmAnalyzer{
 
@@ -9,17 +10,12 @@ public class AlgorithmAnalyzer{
 
     int[] array = new int[100000];
     for(int i = 0 ; i < 100000 ; i++){
-      array[i] = i;
+       array[i] = (int)(Math.random() * 100000000);
     }
 
-    int[] array2 = array.clone();
-   //System.out.println("Time: " + Quicksort.dualPivotSort(array));
-  //  System.out.println(Arrays.toString(array));
-    System.out.println("Time: " + Quicksort.sort(array2, Quicksort.PivotType.MidOfFirstMidLastElement));
-  //  System.out.println(Arrays.toString(array2));
 
-    System.out.println("Heap Time: " + Heapsort.sort(array2));
-  //  System.out.println(Arrays.toString(array2));
+    System.out.println("Time: " + Heapsort.sort(array));
+    //System.out.println(Arrays.toString(array));
 
   }
 }

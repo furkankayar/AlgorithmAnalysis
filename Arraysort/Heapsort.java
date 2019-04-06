@@ -23,14 +23,13 @@ public class Heapsort{
     }
   }
 
-  private static void sort(int arr[], int low, int high){
+  static void sort(int arr[], int low, int high){
 
     int n = high - low;
 
     for(int i = n/2 ; i >= 0 ; i--){
       maxHeapify(arr, low, high, i);
     }
-
 
     for(int i = n + low; i > low ; i--){
 
