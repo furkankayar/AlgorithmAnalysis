@@ -40,13 +40,13 @@ public class Heapsort{
     }
   }
 
-  public static long sort(int arr[]) throws IllegalArgumentException{
+  public static double sort(int arr[]) throws IllegalArgumentException{
 
     if(arr == null || arr.length == 0) throw new IllegalArgumentException("Array is empty.");
 
-    long startTime = System.currentTimeMillis();
+    long startTime = System.nanoTime();
     sort(arr, 0 , arr.length - 1);
 
-    return System.currentTimeMillis() - startTime;
+    return (System.nanoTime() - startTime) / 1000000d;
   }
 }

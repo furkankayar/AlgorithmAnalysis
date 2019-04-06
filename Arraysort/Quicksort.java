@@ -1,6 +1,6 @@
 
 package Arraysort;
-import java.util.Arrays;
+
 
 public class Quicksort{
 
@@ -11,14 +11,14 @@ public class Quicksort{
   }
 
 
-  public static long sort(int[] arrayToSort, PivotType pivotType) throws IllegalArgumentException{
+  public static double sort(int[] arrayToSort, PivotType pivotType) throws IllegalArgumentException{
 
     if(arrayToSort == null || arrayToSort.length == 0) throw new IllegalArgumentException("Array is empty.");
 
 
-    long startTime = System.currentTimeMillis();
+    long startTime = System.nanoTime();
     sortWithOnePivot(arrayToSort, 0, arrayToSort.length - 1, pivotType);
-    return System.currentTimeMillis() - startTime;
+    return (System.nanoTime() - startTime) / 1000000d;
   }
 
 	private static void sortWithOnePivot(int[] arr, int low, int high, PivotType pivotType){
@@ -60,7 +60,7 @@ public class Quicksort{
     arrayToSort[high] = temp;
   }
 
-  static int partitionOnePivot(int[] arr, int low, int high, PivotType pivotType){ //https://www.geeksforgeeks.org/quick-sort/
+  private static int partitionOnePivot(int[] arr, int low, int high, PivotType pivotType){ //https://www.geeksforgeeks.org/quick-sort/
 
     setArrayPivot(arr, pivotType, high, low);
 
@@ -82,14 +82,36 @@ public class Quicksort{
     return i+1;
   }
 
+  static int partitionOnePivot(int[] arr, int low, int high){
 
-  public static long dualPivotSort(int[] arrayToSort) throws IllegalArgumentException{
+    int pivot = arr[high];
+    int i = low-1;
+
+    for (int j=low; j<high; j++){
+      if (arr[j] <= pivot){
+        i++;
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+      }
+    }
+
+    int temp = arr[i+1];
+    arr[i+1] = arr[high];
+    arr[high] = temp;
+    return i+1;
+  }
+
+
+
+
+  public static double dualPivotSort(int[] arrayToSort) throws IllegalArgumentException{
 
     if(arrayToSort == null || arrayToSort.length == 0) throw new IllegalArgumentException("Array is empty.");
 
-    long startTime = System.currentTimeMillis();
+    long startTime = System.nanoTime();
     sortWithTwoPivot(arrayToSort, 0, arrayToSort.length - 1);
-    return System.currentTimeMillis() - startTime;
+    return (System.nanoTime() - startTime) / 1000000d;
   }
 
   private static void sortWithTwoPivot(int[] arr, int low, int high){
