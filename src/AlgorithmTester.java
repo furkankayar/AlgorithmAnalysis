@@ -1,4 +1,5 @@
-import java.util.Arrays;
+
+
 import Arraysort.Quicksort;
 import Arraysort.Heapsort;
 import Arraysort.Introsort;
@@ -175,14 +176,11 @@ public class AlgorithmTester{
     System.out.print(String.format("%18.3f%3s", Introsort.sort(numbers100k.clone()), " ms"));
 
 
-
-
-
-
     System.out.println("\n");
   }
 
   public static void main(String[] args){
+
 
     new AlgorithmTester().testAlgorithms();
 

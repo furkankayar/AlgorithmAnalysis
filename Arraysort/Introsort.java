@@ -6,8 +6,8 @@ public class Introsort{
 
   public static double sort(int[] arr){
 
-    long startTime = System.nanoTime();
     int maxdepth = (int)((Math.log(arr.length) / Math.log(2)) * 2);
+    long startTime = System.nanoTime();
     sort(arr, 0, arr.length - 1 , maxdepth);
     return (System.nanoTime() - startTime) / 1000000d;
   }

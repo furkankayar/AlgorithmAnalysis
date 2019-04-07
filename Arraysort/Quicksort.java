@@ -60,7 +60,7 @@ public class Quicksort{
     arrayToSort[high] = temp;
   }
 
-  private static int partitionOnePivot(int[] arr, int low, int high, PivotType pivotType){ //https://www.geeksforgeeks.org/quick-sort/
+  private static int partitionOnePivot(int[] arr, int low, int high, PivotType pivotType){
 
     setArrayPivot(arr, pivotType, high, low);
 
@@ -126,7 +126,7 @@ public class Quicksort{
     }
   }
 
-  private static int partitionTwoPivot(int[] arr, int low, int high, IntegerNumber lp){ // https://www.geeksforgeeks.org/dual-pivot-quicksort/
+  private static int partitionTwoPivot(int[] arr, int low, int high, IntegerNumber lp){ 
 
     if(arr[low] > arr[high]){
       int temp = arr[low];
